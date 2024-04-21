@@ -6,5 +6,5 @@ namespace MayTheFourth.Application.Movies.QueriesHandlers;
 public class SearchByTitleQueryHandler(IMovieRepository movieState) : IRequestHandler<SearchByTitleQuery, MovieModel>
 {
     public async Task<MovieModel> Handle(SearchByTitleQuery request, CancellationToken cancellationToken)
-        => await movieState.SearchByName(request.Name, cancellationToken);
+        => await movieState.SearchByTitle(request.Title, cancellationToken);
 }

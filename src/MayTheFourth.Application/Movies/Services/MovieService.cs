@@ -5,9 +5,9 @@ namespace MayTheFourth.Application.Movies.Services;
 
 public sealed class MovieService(IMediator mediator) : IMovieService
 {
-    public async Task<Result<MovieModel>> SearchByName(string name, CancellationToken cancellationToken = default)
+    public async Task<Result<MovieModel>> SearchByTitle(string title, CancellationToken cancellationToken = default)
     {
-        var movie = await mediator.Send(new SearchByNameQuery(name), cancellationToken);
+        var movie = await mediator.Send(new SearchByTitleQuery(title), cancellationToken);
         if (movie is null)
             return Result<MovieModel>.Failure(Error.NotFound);
 
