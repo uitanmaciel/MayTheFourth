@@ -11,4 +11,27 @@
     <PackageReference Include="Smooth.Result" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Peoples\Interfaces\Services\" />
+    <Folder Include="Peoples\Interfaces\State\" />
+    <Folder Include="Peoples\QueriesHandlers\" />
+    <Folder Include="Peoples\Queries\" />
+    <Folder Include="Peoples\Services\" />
+    <Folder Include="Planets\Interfaces\Services\" />
+    <Folder Include="Planets\Interfaces\State\" />
+    <Folder Include="Planets\QueriesHandlers\" />
+    <Folder Include="Planets\Queries\" />
+    <Folder Include="Planets\Services\" />
+    <Folder Include="Starships\Interfaces\Services\" />
+    <Folder Include="Starships\Interfaces\State\" />
+    <Folder Include="Starships\QueriesHandlers\" />
+    <Folder Include="Starships\Queries\" />
+    <Folder Include="Starships\Services\" />
+    <Folder Include="Vehicles\Interfaces\Services\" />
+    <Folder Include="Vehicles\Interfaces\State\" />
+    <Folder Include="Vehicles\QueriesHandlers\" />
+    <Folder Include="Vehicles\Queries\" />
+    <Folder Include="Vehicles\Services\" />
+  </ItemGroup>
+
 </Project>

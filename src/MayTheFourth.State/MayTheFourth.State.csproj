@@ -10,4 +10,20 @@
     <ProjectReference Include="..\MayTheFourth.Application\MayTheFourth.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Peoples\" />
+    <Folder Include="Planets\" />
+    <Folder Include="Starships\" />
+    <Folder Include="Vehicles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+  </ItemGroup>
+
 </Project>
