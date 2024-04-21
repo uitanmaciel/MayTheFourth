@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Peoples\" />
     <Folder Include="Planets\" />
     <Folder Include="Starships\" />
     <Folder Include="Vehicles\" />

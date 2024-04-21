@@ -6,6 +6,8 @@ builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblies(
     AppDomain.CurrentDomain.GetAssemblies()));
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IPeopleService, PeopleService>();
+builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 
 
 var app = builder.Build();
