@@ -22,11 +22,6 @@
     <Folder Include="Starships\QueriesHandlers\" />
     <Folder Include="Starships\Queries\" />
     <Folder Include="Starships\Services\" />
-    <Folder Include="Vehicles\Interfaces\Services\" />
-    <Folder Include="Vehicles\Interfaces\State\" />
-    <Folder Include="Vehicles\QueriesHandlers\" />
-    <Folder Include="Vehicles\Queries\" />
-    <Folder Include="Vehicles\Services\" />
   </ItemGroup>
 
 </Project>

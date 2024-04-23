@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Planets\" />
     <Folder Include="Starships\" />
-    <Folder Include="Vehicles\" />
   </ItemGroup>
 
   <ItemGroup>

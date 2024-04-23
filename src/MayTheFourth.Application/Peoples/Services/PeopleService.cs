@@ -1,8 +1,5 @@
-﻿using MayTheFourth.Application.Movies;
-using MayTheFourth.Application.Peoples.Interfaces.Services;
+﻿using MayTheFourth.Application.Peoples.Interfaces.Services;
 using MayTheFourth.Application.Peoples.Queries;
-using MediatR;
-using System.Xml.Linq;
 
 namespace MayTheFourth.Application.Peoples.Services;
 
