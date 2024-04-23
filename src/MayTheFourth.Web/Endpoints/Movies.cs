@@ -23,11 +23,7 @@ public static class Movies
             var result = await service.SearchByDirector(director);
             return result;
         });
-        app.MapGet("/api/v1/movies/get-by-producer/{producer}", async (IMovieService service, string producer) =>
-        {
-            var result = await service.SearchByProducer(producer);
-            return result;
-        });
+
         app.MapGet("/api/v1/movies/get-by-releaseDate/{releaseDate}", async (IMovieService service, DateTime releaseDate) =>
         {
             var result = await service.SearchByReleaseDate(releaseDate);

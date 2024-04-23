@@ -1,3 +1,5 @@
-﻿namespace MayTheFourth.Application.Movies.Queries;
+﻿using MayTheFourth.Application.Peoples;
 
-public record SearchAllMoviesQuery() : IRequest<MovieModel>;
+namespace MayTheFourth.Application.Movies.Queries;
+
+public record SearchAllMoviesQuery() : IRequest<List<MovieModel>>;

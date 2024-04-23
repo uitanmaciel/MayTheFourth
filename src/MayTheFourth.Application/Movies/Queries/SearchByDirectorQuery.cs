@@ -1,3 +1,3 @@
 ﻿namespace MayTheFourth.Application.Movies.Queries;
 
-public record SearchByDirectorQuery(string Director) : IRequest<MovieModel>;
+public record SearchByDirectorQuery(string Director) : IRequest<List<MovieModel>>;

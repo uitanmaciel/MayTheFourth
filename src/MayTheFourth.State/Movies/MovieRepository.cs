@@ -5,17 +5,12 @@ namespace MayTheFourth.State.Movies;
 
 public class MovieRepository : IMovieRepository
 {
-    public Task<MovieModel> SearchAllMovies(CancellationToken cancellationToken = default)
+    public Task<List<MovieModel>> SearchAllMovies(CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public Task<MovieModel> SearchByDirector(string director, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<MovieModel> SearchByProducer(string producer, CancellationToken cancellationToken = default)
+    public Task<List<MovieModel>> SearchByDirector(string director, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
