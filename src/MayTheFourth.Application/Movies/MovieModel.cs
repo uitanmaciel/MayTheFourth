@@ -9,7 +9,7 @@ public sealed class MovieModel()
 {
     public int Id { get; set; }
     public string Title { get; set; } = null!;
-    public string Episode { get; set; } = null!;
+    public int Episode { get; set; }
     public string OpeningCrawl { get; set; } = null!;
     public string Director { get; set; } = null!;
     public string Producer { get; set; } = null!;
@@ -22,7 +22,7 @@ public sealed class MovieModel()
     public MovieModel(
         int id, 
         string title, 
-        string episode, 
+        int episode, 
         string openingCrawl, 
         string director, 
         string producer, 
