@@ -5,7 +5,7 @@ namespace MayTheFourth.State.Movies;
 
 public class MovieRepository : IMovieRepository
 {
-    public Task<MovieModel> SearchByName(string name, CancellationToken cancellationToken = default)
+    public Task<MovieModel> SearchByTitle(string title, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
