@@ -8,9 +8,13 @@ namespace MayTheFourth.Application.Peoples.Services;
 
 public class PeopleService(IMediator mediator) : IPeopleService
 {
-    public Task<Result<List<PeopleModel>>> ListAll(CancellationToken cancellationToken = default)
+    public async Task<Result<List<PeopleModel>>> ListAll(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var people = await mediator.Send(new ListAllQuery(), cancellationToken);
+        if (people is null)
+            return Result<List<PeopleModel>>.Failure(Error.NotFound);
+
+        return Result<List<PeopleModel>>.Ok(people);
     }
 
     public async Task<Result<PeopleModel>> SearchByGender(string gender, CancellationToken cancellationToken = default)
