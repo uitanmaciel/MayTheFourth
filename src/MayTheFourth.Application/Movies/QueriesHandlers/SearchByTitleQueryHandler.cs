@@ -3,8 +3,8 @@ using MayTheFourth.Application.Movies.Queries;
 
 namespace MayTheFourth.Application.Movies.QueriesHandlers;
 
-public class SearchByTitleQueryHandler(IMovieRepository movieState) : IRequestHandler<SearchByTitleQuery, MovieModel>
+public class SearchByTitleQueryHandler(IMovieRepository repository) : IRequestHandler<SearchByTitleQuery, IList<Movie>>
 {
-    public async Task<MovieModel> Handle(SearchByTitleQuery request, CancellationToken cancellationToken)
-        => await movieState.SearchByTitle(request.Title, cancellationToken);
+    public async Task<IList<Movie>> Handle(SearchByTitleQuery request, CancellationToken cancellationToken)
+        => await repository.SearchByTitleAsync(request.Title, cancellationToken);
 }
