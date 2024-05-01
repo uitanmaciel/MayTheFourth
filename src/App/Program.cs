@@ -12,11 +12,14 @@ builder.Services.AddScoped<IPeopleServices, PeopleServices>();
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 builder.Services.AddScoped<IPlanetServices, PlanetServices>();
 builder.Services.AddScoped<IPlanetRepository, PlanetRepository>();
+builder.Services.AddScoped<IVehicleServices, VehicleServices>();
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 
 var app = builder.Build();
 app.MoviesEndpoints();
 app.PeopleEndpoints();
 app.PlanetEndpoints();
+app.VehiclesEndpoints();
 
 
 if (app.Environment.IsDevelopment())

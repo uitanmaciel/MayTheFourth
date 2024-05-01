@@ -64,13 +64,13 @@ public sealed class Planet()
         return new PlanetResponse
         {
             Name = planet.Name,
-            RotationPeriod = planet.RotationPeriod,
-            OrbitalPeriod = planet.OrbitalPeriod,
-            Diameter = planet.Diameter,
+            RotationPeriod = string.Concat(planet.RotationPeriod, " hours"),
+            OrbitalPeriod = string.Concat(planet.OrbitalPeriod, " days"),
+            Diameter = string.Concat(planet.Diameter, " km"),
             Climate = planet.Climate,
             Gravity = planet.Gravity,
             Terrain = planet.Terrain,
-            SurfaceWater = planet.SurfaceWater,
+            SurfaceWater = string.Concat(planet.SurfaceWater, "%"),
             Population = planet.Population,
             Characters = ToPlanetPeopleResponse(planet),
             Movies = ToPlanetMovieResponse(planet),

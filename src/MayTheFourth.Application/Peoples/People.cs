@@ -61,8 +61,8 @@ public sealed class People()
         return new PeopleResponse
         {
             Name = people.Name,
-            Height = people.Height,
-            Weight = people.Weight,
+            Height = string.Concat(people.Height, " cm"),
+            Weight = string.Concat(people.Weight, " kg"),
             HairColor = people.HairColor,
             SkinColor = people.SkinColor,
             EyeColor = people.EyeColor,

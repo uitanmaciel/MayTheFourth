@@ -13,3 +13,7 @@ global using MayTheFourth.Application.Planets.Interfaces.Services;
 global using MayTheFourth.Application.Planets.Interfaces.State;
 global using MayTheFourth.Application.Planets.Services;
 global using MayTheFourth.State.Planets;
+global using MayTheFourth.Application.Vehicles.Interfaces.Services;
+global using MayTheFourth.Application.Vehicles.Interfaces.State;
+global using MayTheFourth.Application.Vehicles.Services;
+global using MayTheFourth.State.Vehicles;

@@ -1,4 +1,5 @@
 using MayTheFourth.Application.Movies;
+using MayTheFourth.Application.Vehicles.Responses;
 
 namespace MayTheFourth.Application.Vehicles;
 
@@ -50,5 +51,48 @@ public sealed class Vehicle()
         Class = @class;
         MovieCode = movieCode;
         Movies = movies;
+    }
+    
+    public static VehicleResponse ToResponse(Vehicle? vehicle) => FromModelToResponse(vehicle);
+    public static IList<VehicleResponse> ToResponse(IList<Vehicle> vehicles) => FromModelToResponse(vehicles);
+    
+    private static VehicleResponse FromModelToResponse(Vehicle? vehicle)
+    {
+        if (vehicle is null) return new VehicleResponse();
+        
+        return new VehicleResponse
+        {
+            Name = vehicle.Name,
+            Model = vehicle.Model,
+            Manufacturer = vehicle.Manufacturer,
+            CostInCredits = vehicle.CostInCredits,
+            Length = string.Concat(vehicle.Length, " meters"),
+            MaxSpeed = string.Concat(vehicle.MaxSpeed, " km/h"),
+            Crew = vehicle.Crew,
+            Passengers = vehicle.Passengers,
+            CargoCapacity = string.Concat(vehicle.CargoCapacity, " kg"),
+            Consumables = vehicle.Consumables,
+            VehicleClass = vehicle.Class,
+            Movies = ToVehicleMovieResponse(vehicle)
+        };
+    }
+    
+    private static IList<VehicleResponse> FromModelToResponse(IList<Vehicle> vehicles)
+    {
+        return vehicles.Select(FromModelToResponse).ToList();
+    }
+    
+    private static List<VehicleMovieResponse> ToVehicleMovieResponse(Vehicle? vehicle)
+    {
+        if(vehicle is null) return new List<VehicleMovieResponse>();
+
+        return vehicle.Movies
+            .GroupBy(m => m.Code)
+            .Select(movie => movie.First())
+            .Select(movie => new VehicleMovieResponse
+            {
+                Id = movie.Code,
+                Title = movie.Title,
+            }).ToList();
     }
 }
