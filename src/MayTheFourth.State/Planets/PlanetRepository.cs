@@ -90,5 +90,5 @@ public class PlanetRepository(MayTheFourthDbContext context) : IPlanetRepository
         return planets[0];
     }
 
-    public async ValueTask DisposeAsync() => context.DisposeAsync();
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
 }

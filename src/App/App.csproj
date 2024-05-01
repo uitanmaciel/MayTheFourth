@@ -17,4 +17,12 @@
     <ProjectReference Include="..\MayTheFourth.Web\MayTheFourth.Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <Target Name="CopyStaticFiles" AfterTargets="BeforeBuild">
+    <Copy SourceFiles="../MayTheFourth.State/maythefourth.db" DestinationFolder="wwwroot" SkipUnchangedFiles="true" />
+  </Target>
+
 </Project>

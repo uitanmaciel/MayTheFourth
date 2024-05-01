@@ -118,5 +118,5 @@ public class PeopleRepository(MayTheFourthDbContext context) : IPeopleRepository
         return peoples;
     }
 
-    public async ValueTask DisposeAsync() => context.DisposeAsync();
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
 }

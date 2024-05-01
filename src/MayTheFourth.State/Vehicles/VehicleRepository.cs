@@ -86,5 +86,5 @@ public class VehicleRepository(MayTheFourthDbContext context) : IVehicleReposito
         return vehicles;
     }
 
-    public async ValueTask DisposeAsync() => context.DisposeAsync();
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
 }

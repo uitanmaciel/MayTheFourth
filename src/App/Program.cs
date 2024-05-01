@@ -24,12 +24,8 @@ app.PlanetEndpoints();
 app.VehiclesEndpoints();
 app.StarshipEndpoints();
 
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "StarWarsWebApi"); });
-}
+app.UseSwagger();
+app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "StarWarsWebApi"); });
 
 app.UseHttpsRedirection();
 app.Run();

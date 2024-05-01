@@ -86,5 +86,5 @@ public class StarshipRepository(MayTheFourthDbContext context) : IStarshipReposi
         return starships;
     }
 
-    public async ValueTask DisposeAsync() => context.DisposeAsync();
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
 }
