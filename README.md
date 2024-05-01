@@ -33,7 +33,6 @@ Uitan Maciel - https://github.com/uitanmaciel
 * Conhecimento técnico
 
 ## ⚙️ Como rodar o projeto
-#### para popular o banco de dados:
 Configure <b>'App'</b> como projeto de inicialização.
 Excute o seguinte comando:
 ```
