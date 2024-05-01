@@ -15,6 +15,6 @@ public class MayTheFourthDbContext(DbContextOptions<MayTheFourthDbContext> optio
     public DbSet<Starship> Starships { get; set; }
     public DbSet<Vehicle> Vehicles { get; set; }
 
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //     => optionsBuilder.UseSqlite("Data Source=C:/Users/Uitan Maciel/Documents/MayTheFourth/src/MayTheFourth.State/maythefourth.db");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.UseSqlite("Data Source=wwwroot/maythefourth.db");
 }

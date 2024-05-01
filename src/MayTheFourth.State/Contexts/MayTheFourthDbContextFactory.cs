@@ -8,7 +8,7 @@ public class MayTheFourthDbContextFactory : IDesignTimeDbContextFactory<MayTheFo
     public MayTheFourthDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<MayTheFourthDbContext>();
-        optionsBuilder.UseSqlite("Data Source=C:/Users/Uitan Maciel/Documents/MayTheFourth/src/MayTheFourth.State/maythefourth.db");
+        optionsBuilder.UseSqlite("Data Source=wwwroot/maythefourth.db");
         return new MayTheFourthDbContext(optionsBuilder.Options);
     }
 }
