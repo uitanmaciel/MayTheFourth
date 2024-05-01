@@ -12,12 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Planets\Interfaces\Services\" />
-    <Folder Include="Planets\Interfaces\State\" />
-    <Folder Include="Planets\QueriesHandlers\" />
-    <Folder Include="Planets\Queries\" />
-    <Folder Include="Planets\Responses\" />
-    <Folder Include="Planets\Services\" />
     <Folder Include="Starships\Interfaces\Services\" />
     <Folder Include="Starships\Interfaces\State\" />
     <Folder Include="Starships\QueriesHandlers\" />

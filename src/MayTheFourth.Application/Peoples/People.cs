@@ -85,7 +85,7 @@ public sealed class People()
         return people.Planets
             .Select(people => new PeoplePlanetResponse
             {
-                Id = people.Id,
+                Id = people.Code,
                 Name = people.Name
             }).FirstOrDefault();
     }
@@ -99,7 +99,7 @@ public sealed class People()
             .Select(movie => movie.First())
             .Select(movie => new PeopleMoviesResponse
             {
-                Id = movie.Id,
+                Id = movie.Code,
                 Title = movie.Title,
             }).ToList();
     }

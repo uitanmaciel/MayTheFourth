@@ -9,3 +9,7 @@ global using MayTheFourth.Application.Peoples.Interfaces.Services;
 global using MayTheFourth.Application.Peoples.Interfaces.State;
 global using MayTheFourth.Application.Peoples.Services;
 global using MayTheFourth.State.Peoples;
+global using MayTheFourth.Application.Planets.Interfaces.Services;
+global using MayTheFourth.Application.Planets.Interfaces.State;
+global using MayTheFourth.Application.Planets.Services;
+global using MayTheFourth.State.Planets;

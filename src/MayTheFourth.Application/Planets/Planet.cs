@@ -1,5 +1,6 @@
 using MayTheFourth.Application.Movies;
 using MayTheFourth.Application.Peoples;
+using MayTheFourth.Application.Planets.Responses;
 
 namespace MayTheFourth.Application.Planets;
 
@@ -51,5 +52,61 @@ public sealed class Planet()
         MovieCode = movieCode;
         Peoples = peoples;
         Movies = movies;
+    }
+    
+    public static PlanetResponse ToResponse(Planet? planet) => FromModelToResponse(planet);
+    public static IList<PlanetResponse> ToResponse(IList<Planet> planets) => FromModelToResponse(planets);
+    
+    private static PlanetResponse FromModelToResponse(Planet? planet)
+    {
+        if (planet is null) return new PlanetResponse();
+        
+        return new PlanetResponse
+        {
+            Name = planet.Name,
+            RotationPeriod = planet.RotationPeriod,
+            OrbitalPeriod = planet.OrbitalPeriod,
+            Diameter = planet.Diameter,
+            Climate = planet.Climate,
+            Gravity = planet.Gravity,
+            Terrain = planet.Terrain,
+            SurfaceWater = planet.SurfaceWater,
+            Population = planet.Population,
+            Characters = ToPlanetPeopleResponse(planet),
+            Movies = ToPlanetMovieResponse(planet),
+        };
+    }
+    
+    private static IList<PlanetResponse> FromModelToResponse(IList<Planet> planets)
+    {
+        return planets.Select(FromModelToResponse).ToList();
+    }
+    
+    private static IList<PlanetPeopleResponse> ToPlanetPeopleResponse(Planet? planet)
+    {
+        if (planet is null) return new List<PlanetPeopleResponse>();
+
+        return planet.Peoples
+            .GroupBy(p => p.Code)
+            .Select(people => people.First())
+            .Select(people => new PlanetPeopleResponse
+            {
+                Id = people.Code,
+                Name = people.Name
+            }).ToList();
+    }
+
+    private static IList<PlanetMovieResponse> ToPlanetMovieResponse(Planet? planet)
+    {
+        if (planet is null) return new List<PlanetMovieResponse>();
+
+        return planet.Movies
+            .GroupBy(p => p.Code)
+            .Select(movive => movive.First())
+            .Select(movie => new PlanetMovieResponse
+            {
+                Id = movie.Code,
+                Title = movie.Title
+            }).ToList();
     }
 }

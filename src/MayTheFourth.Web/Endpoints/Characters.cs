@@ -10,24 +10,28 @@ public static class Characters
         {
             var result = await services.GetPeoplesAsync();
             return result;
-        }).WithName("GetAllPeoples");
+        }).WithName("GetAllPeoples")
+        .WithTags("Characters");
         
         app.MapGet("/api/v1/peoples/get-by-code/{code}", async (IPeopleServices services, int code) =>
         {
             var result = await services.GetPeopleByCodeAsync(code);
             return result;
-        }).WithName("GetPeopleByCode");
+        }).WithName("GetPeopleByCode")
+        .WithTags("Characters");
         
         app.MapGet("/api/v1/peoples/get-by-name/{name}", async (IPeopleServices services, string name) =>
         {
             var result = await services.GetPeopleByNameAsync(name);
             return result;
-        }).WithName("GetPeopleByName");
+        }).WithName("GetPeopleByName")
+        .WithTags("Characters");
 
         app.MapGet("/api/v1/get-by-gender/{gender}", async (IPeopleServices services, string gender) =>
         {
             var result = await services.GetPeopleByGenderAsync(gender);
             return result;
-        }).WithName("GetPeopleByGender");
+        }).WithName("GetPeopleByGender")
+        .WithTags("Characters");
     }
 }
