@@ -17,3 +17,7 @@ global using MayTheFourth.Application.Vehicles.Interfaces.Services;
 global using MayTheFourth.Application.Vehicles.Interfaces.State;
 global using MayTheFourth.Application.Vehicles.Services;
 global using MayTheFourth.State.Vehicles;
+global using MayTheFourth.Application.Starships.Interfaces.Services;
+global using MayTheFourth.Application.Starships.Interfaces.State;
+global using MayTheFourth.Application.Starships.Services;
+global using MayTheFourth.State.Starships;

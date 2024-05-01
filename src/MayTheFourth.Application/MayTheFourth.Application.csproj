@@ -11,13 +11,4 @@
     <PackageReference Include="Smooth.Result" Version="1.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Starships\Interfaces\Services\" />
-    <Folder Include="Starships\Interfaces\State\" />
-    <Folder Include="Starships\QueriesHandlers\" />
-    <Folder Include="Starships\Queries\" />
-    <Folder Include="Starships\Responses\" />
-    <Folder Include="Starships\Services\" />
-  </ItemGroup>
-
 </Project>

@@ -6,25 +6,16 @@ public static class Planets
 {
     public static void PlanetEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/v1/planets/get-all", async (IPlanetServices services) =>
-        {
-            var result = await services.GetPlanetsAsync();
-            return result;
-        }).WithName("GetAllPlanets")
-        .WithTags("Planets");
+        app.MapGet("/api/v1/planets", async (IPlanetServices services) => await services.GetPlanetsAsync())
+            .WithName("GetAllPlanets")
+            .WithTags("Planets");
         
-        app.MapGet("/api/v1/planets/get-by-code/{code}", async (IPlanetServices services, int code) =>
-        {
-            var result = await services.GetPlanetByCodeAsync(code);
-            return result;
-        }).WithName("GetPlanetByCode")
-        .WithTags("Planets");
+        app.MapGet("/api/v1/planets/get-by-code/{code}", async (IPlanetServices services, int code) => await services.GetPlanetByCodeAsync(code))
+            .WithName("GetPlanetByCode")
+            .WithTags("Planets");
 
-        app.MapGet("/api/v1/planets/get-by-name", async (IPlanetServices services, string name) =>
-        {
-            var result = await services.GetPlanetByNameAsync(name);
-            return result;
-        }).WithName("GetPlanetByName")
-        .WithTags("Planets");
+        app.MapGet("/api/v1/planets/get-by-name", async (IPlanetServices services, string name) => await services.GetPlanetByNameAsync(name))
+            .WithName("GetPlanetByName")
+            .WithTags("Planets");
     }
 }

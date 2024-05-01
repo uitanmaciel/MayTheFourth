@@ -12,6 +12,8 @@ builder.Services.AddScoped<IPeopleServices, PeopleServices>();
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
 builder.Services.AddScoped<IPlanetServices, PlanetServices>();
 builder.Services.AddScoped<IPlanetRepository, PlanetRepository>();
+builder.Services.AddScoped<IStarshipServices, StarshipServices>();
+builder.Services.AddScoped<IStarshipRepository, StarshipRepository>();
 builder.Services.AddScoped<IVehicleServices, VehicleServices>();
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 
@@ -20,6 +22,7 @@ app.MoviesEndpoints();
 app.PeopleEndpoints();
 app.PlanetEndpoints();
 app.VehiclesEndpoints();
+app.StarshipEndpoints();
 
 
 if (app.Environment.IsDevelopment())

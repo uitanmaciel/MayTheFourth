@@ -78,9 +78,7 @@ public sealed class Vehicle()
     }
     
     private static IList<VehicleResponse> FromModelToResponse(IList<Vehicle> vehicles)
-    {
-        return vehicles.Select(FromModelToResponse).ToList();
-    }
+        => vehicles.Select(FromModelToResponse).ToList();
     
     private static List<VehicleMovieResponse> ToVehicleMovieResponse(Vehicle? vehicle)
     {
