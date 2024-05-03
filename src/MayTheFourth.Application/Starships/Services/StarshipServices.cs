@@ -6,9 +6,9 @@ namespace MayTheFourth.Application.Starships.Services;
 
 public class StarshipServices(ISender mediator) : IStarshipServices
 {
-    public async Task<Result<IList<StarshipResponse>>> GetStarshipsAsync(CancellationToken cancellationToken = default)
+    public async Task<Result<IList<StarshipResponse>>> GetStarshipsAsync(int? skip, int? take, CancellationToken cancellationToken = default)
     {
-        var response = await mediator.Send(new GetStarshipsQuery(), cancellationToken);
+        var response = await mediator.Send(new GetStarshipsQuery(skip ?? 0, take ?? 10), cancellationToken);
         if (response is null) return Result<IList<StarshipResponse>>.Failure(Error.NotFound);
         return Result<IList<StarshipResponse>>.Ok(Starship.ToResponse(response));
     }

@@ -1,3 +1,3 @@
 ﻿namespace MayTheFourth.Application.Movies.Queries;
 
-public record GetAllQuery() : IRequest<IList<Movie>>;
+public record GetAllQuery(int? Skip, int? Take) : IRequest<IList<Movie>>;

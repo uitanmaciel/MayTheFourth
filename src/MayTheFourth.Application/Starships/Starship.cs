@@ -5,26 +5,24 @@ namespace MayTheFourth.Application.Starships;
 
 public sealed class Starship()
 {
-    public int Id { get; set; }
-    public int Code { get; set; }
-    public string Name { get; set; } = null!;
-    public string Model { get; set; } = null!;
-    public string Manufacturer { get; set; } = null!;
-    public string CostInCredits { get; set; } = null!;
-    public string Length { get; set; } = null!;
-    public string MaxSpeed { get; set; } = null!;
-    public string Crew { get; set; } = null!;
-    public string Passengers { get; set; } = null!;
-    public string CargoCapacity { get; set; } = null!;
-    public string HyperdriveRating { get; set; } = null!;
-    public string Mglt { get; set; } = null!;
-    public string Consumables { get; set; } = null!;
-    public string Class { get; set; } = null!;
-    public int MovieCode { get; set; }
-    public IList<Movie> Movies { get; set; } = [];
+    public int Id { get; private set; }
+    public string Name { get; private set; } = null!;
+    public string Model { get; private set; } = null!;
+    public string Manufacturer { get; private set; } = null!;
+    public string CostInCredits { get; private set; } = null!;
+    public string Length { get; private set; } = null!;
+    public string MaxSpeed { get; private set; } = null!;
+    public string Crew { get; private set; } = null!;
+    public string Passengers { get; private set; } = null!;
+    public string CargoCapacity { get; private set; } = null!;
+    public string HyperdriveRating { get; private set; } = null!;
+    public string Mglt { get; private set; } = null!;
+    public string Consumables { get; private set; } = null!;
+    public string Class { get; private set; } = null!;
+    public IList<Movie> Movies { get; private set; } = [];
 
     public Starship(
-        int code, 
+        int id, 
         string name, 
         string model, 
         string manufacturer, 
@@ -37,11 +35,9 @@ public sealed class Starship()
         string hyperdriveRating, 
         string mglt, 
         string consumables, 
-        string @class,
-        int movieCode,
-        IList<Movie> movies) : this()
+        string @class) : this()
     {
-        Code = code;
+        Id = id;
         Name = name;
         Model = model;
         Manufacturer = manufacturer;
@@ -55,8 +51,6 @@ public sealed class Starship()
         Mglt = mglt;
         Consumables = consumables;
         Class = @class;
-        MovieCode = movieCode;
-        Movies = movies;
     }
     
     public static StarshipResponse ToResponse(Starship? starship) => FromModelToResponse(starship);
@@ -93,11 +87,9 @@ public sealed class Starship()
         if (starship is null) return new List<StarshipMovieResponse>();
 
         return starship.Movies
-            .GroupBy(m => m.Code)
-            .Select(movie => movie.First())
             .Select(movie => new StarshipMovieResponse
             {
-                Id = movie.Code,
+                Id = movie.Id,
                 Title = movie.Title,
             }).ToList();
     }

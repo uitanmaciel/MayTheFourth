@@ -5,24 +5,22 @@ namespace MayTheFourth.Application.Vehicles;
 
 public sealed class Vehicle()
 {
-    public int Id { get; set; }
-    public int Code { get; set; }
-    public string Name { get; set; } = null!;
-    public string Model { get; set; } = null!;
-    public string Manufacturer { get; set; } = null!;
-    public string CostInCredits { get; set; } = null!;
-    public string Length { get; set; } = null!;
-    public string MaxSpeed { get; set; } = null!;
-    public string Crew { get; set; } = null!;
-    public string Passengers { get; set; } = null!;
-    public string CargoCapacity { get; set; } = null!;
-    public string Consumables { get; set; } = null!;
-    public string Class { get; set; } = null!;
-    public int MovieCode { get; set; }
-    public IList<Movie> Movies { get; set; } = [];
+    public int Id { get; private set; }
+    public string Name { get; private set; } = null!;
+    public string Model { get; private set; } = null!;
+    public string Manufacturer { get; private set; } = null!;
+    public string CostInCredits { get; private set; } = null!;
+    public string Length { get; private set; } = null!;
+    public string MaxSpeed { get; private set; } = null!;
+    public string Crew { get; private set; } = null!;
+    public string Passengers { get; private set; } = null!;
+    public string CargoCapacity { get; private set; } = null!;
+    public string Consumables { get; private set; } = null!;
+    public string Class { get; private set; } = null!;
+    public IList<Movie> Movies { get; private set; } = [];
     
     public Vehicle(
-        int code, 
+        int id, 
         string name, 
         string model, 
         string manufacturer, 
@@ -33,11 +31,9 @@ public sealed class Vehicle()
         string passengers, 
         string cargoCapacity, 
         string consumables, 
-        string @class,
-        int movieCode,
-        IList<Movie> movies) : this()
+        string @class) : this()
     {
-        Code = code;
+        Id = id;
         Name = name;
         Model = model;
         Manufacturer = manufacturer;
@@ -49,8 +45,6 @@ public sealed class Vehicle()
         CargoCapacity = cargoCapacity;
         Consumables = consumables;
         Class = @class;
-        MovieCode = movieCode;
-        Movies = movies;
     }
     
     public static VehicleResponse ToResponse(Vehicle? vehicle) => FromModelToResponse(vehicle);
@@ -85,11 +79,9 @@ public sealed class Vehicle()
         if(vehicle is null) return new List<VehicleMovieResponse>();
 
         return vehicle.Movies
-            .GroupBy(m => m.Code)
-            .Select(movie => movie.First())
             .Select(movie => new VehicleMovieResponse
             {
-                Id = movie.Code,
+                Id = movie.Id,
                 Title = movie.Title,
             }).ToList();
     }

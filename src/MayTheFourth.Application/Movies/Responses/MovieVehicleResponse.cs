@@ -4,6 +4,6 @@ namespace MayTheFourth.Application.Movies.Responses;
 
 public record MovieVehicleResponse
 {
-    [JsonPropertyName("id")] public int Code { get; set; }
+    [JsonPropertyName("id")] public int Id { get; set; }
     [JsonPropertyName("name")] public string Name { get; set; } = null!;
 }

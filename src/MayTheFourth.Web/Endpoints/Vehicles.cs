@@ -6,7 +6,7 @@ public static class Vehicles
 {
     public static void VehiclesEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/v1/vehicles", async (IVehicleServices services) => await services.GetVehiclesAsync())
+        app.MapGet("/api/v1/vehicles", async (IVehicleServices services, int? skip, int? take) => await services.GetVehiclesAsync(skip, take))
             .WithName("GetVehicles")
             .WithTags("Vehicles")
             .WithSummary("Returns all vehicles from Star Wars universe.")

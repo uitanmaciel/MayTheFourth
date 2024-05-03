@@ -6,5 +6,5 @@ namespace MayTheFourth.Application.Planets.QueriesHandlers;
 public class GetPlanetsQueryHandler(IPlanetRepository repository) : IRequestHandler<GetPlanetsQuery, IList<Planet>>
 {
     public async Task<IList<Planet>> Handle(GetPlanetsQuery request, CancellationToken cancellationToken)
-        => await repository.GetPlanetsAsync(cancellationToken);
+        => await repository.GetPlanetsAsync(request.Skip, request.Take, cancellationToken);
 }

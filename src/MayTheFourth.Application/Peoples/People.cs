@@ -1,42 +1,25 @@
 using MayTheFourth.Application.Movies;
 using MayTheFourth.Application.Peoples.Responses;
-using MayTheFourth.Application.Planets;
 
 namespace MayTheFourth.Application.Peoples;
 
 public sealed class People()
 {
-    public int Id { get; set; }
-    public int Code { get; set; }
-    public string Name { get; set; } = null!;
-    public string Height { get; set; } = null!;
-    public string Weight { get; set; } = null!;
-    public string HairColor { get; set; } = null!;
-    public string SkinColor { get; set; } = null!;
-    public string EyeColor { get; set; } = null!;
-    public string BirthYear { get; set; } = null!;
-    public string Gender { get; set; } = null!;
-    public int MovieCode { get; set; }
-    public int PlanetCode { get; set; }
-    public IList<Planet> Planets { get; set; } = [];
-    public IList<Movie> Movies { get; set; } = [];
+    public int Id { get; private set; }
+    public string Name { get; private set; } = null!;
+    public string Height { get; private set; } = null!;
+    public string Weight { get; private set; } = null!;
+    public string HairColor { get; private set; } = null!;
+    public string SkinColor { get; private set; } = null!;
+    public string EyeColor { get; private set; } = null!;
+    public string BirthYear { get; private set; } = null!;
+    public string Gender { get; private set; } = null!;
+    public int PlanetId { get; private set; }
+    public IList<Movie> Movies { get; private set; } = [];
     
-    public People(
-        int code, 
-        string name, 
-        string height, 
-        string weight, 
-        string hairColor, 
-        string skinColor, 
-        string eyeColor, 
-        string birthYear, 
-        string gender,
-        int movieCode,
-        int planetCode,
-        IList<Planet> planets,
-        IList<Movie> movies) : this()
+    public People(int id, string name, string height, string weight, string hairColor, string skinColor, string eyeColor, string birthYear, string gender, int planetId, IList<Movie> movies) : this()
     {
-        Code = code;
+        Id = id;
         Name = name;
         Height = height;
         Weight = weight;
@@ -45,9 +28,7 @@ public sealed class People()
         EyeColor = eyeColor;
         BirthYear = birthYear;
         Gender = gender;
-        MovieCode = movieCode;
-        PlanetCode = planetCode;
-        Planets = planets;
+        PlanetId = planetId;
         Movies = movies;
     }
     
@@ -69,7 +50,7 @@ public sealed class People()
             BirthYear = people.BirthYear,
             Gender = people.Gender,
             Planet = ToPeoplePlanetReponse(people),
-            Movies = toPeopleMoviesResponses(people)
+            Movies = ToPeopleMoviesResponses(people)
         };
     }
     
@@ -82,24 +63,21 @@ public sealed class People()
     {
         if (people is null) return new PeoplePlanetResponse();
 
-        return people.Planets
-            .Select(people => new PeoplePlanetResponse
-            {
-                Id = people.Code,
-                Name = people.Name
-            }).FirstOrDefault();
+        return new PeoplePlanetResponse
+        {
+            Id = people.PlanetId,
+            Name = people.Name
+        };
     }
     
-    private static IList<PeopleMoviesResponse> toPeopleMoviesResponses(People? people)
+    private static IList<PeopleMoviesResponse> ToPeopleMoviesResponses(People? people)
     {
         if (people is null) return new List<PeopleMoviesResponse>();
 
         return people.Movies
-            .GroupBy(m => m.Code)
-            .Select(movie => movie.First())
             .Select(movie => new PeopleMoviesResponse
             {
-                Id = movie.Code,
+                Id = movie.Id,
                 Title = movie.Title,
             }).ToList();
     }

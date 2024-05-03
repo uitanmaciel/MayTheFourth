@@ -1,3 +1,3 @@
 ﻿namespace MayTheFourth.Application.Vehicles.Queries;
 
-public record GetVehiclesQuery() : IRequest<IList<Vehicle>>;
+public record GetVehiclesQuery(int? Skip, int? Take) : IRequest<IList<Vehicle>>;

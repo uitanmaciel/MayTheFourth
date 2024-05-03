@@ -6,9 +6,9 @@ namespace MayTheFourth.Application.Vehicles.Services;
 
 public class VehicleServices(ISender mediator) : IVehicleServices
 {
-    public async Task<Result<IList<VehicleResponse>>> GetVehiclesAsync(CancellationToken cancellationToken = default)
+    public async Task<Result<IList<VehicleResponse>>> GetVehiclesAsync(int? skip, int? take, CancellationToken cancellationToken = default)
     {
-        var response = await mediator.Send(new GetVehiclesQuery(), cancellationToken);
+        var response = await mediator.Send(new GetVehiclesQuery(skip ?? 0, take ?? 10), cancellationToken);
         if (response is null) return Result<IList<VehicleResponse>>.Failure(Error.NotFound);
         return Result<IList<VehicleResponse>>.Ok(Vehicle.ToResponse(response));
     }

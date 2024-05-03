@@ -8,57 +8,27 @@ namespace MayTheFourth.Application.Movies;
 
 public sealed class Movie()
 {
-    public int Id { get; set; }
-    public int Code { get; set; }
-    public string Title { get; set; } = null!;
-    public string Episode { get; set; } = null!;
-    public string OpeningCrawl { get; set; } = null!;
-    public string Director { get; set; } = null!;
-    public string Producer { get; set; } = null!;
-    public string ReleaseDate { get; set; } = null!;
-    public int CharacterCode { get; set; }
-    public int PlanetCode { get; set; }
-    public int VehicleCode { get; set; }
-    public int StarshipCode { get; set; }
-    public IList<People> Characters { get; set; } = [];
-    public IList<Planet> Planets { get; set; } = [];
-    public IList<Vehicle> Vehicles { get; set; } = [];
-    public IList<Starship> Starships { get; set; } = [];
+    public int Id { get; private set; }
+    public string Title { get; private set; } = null!;
+    public short Episode { get; private set; }
+    public string OpeningCrawl { get; private set; } = null!;
+    public string Director { get; private set; } = null!;
+    public string Producer { get; private set; } = null!;
+    public string ReleaseDate { get; private set; } = null!;
+    public IList<People> Characters { get; private set; } = [];
+    public IList<Planet> Planets { get; private set; } = [];
+    public IList<Vehicle> Vehicles { get; private set; } = [];
+    public IList<Starship> Starships { get; private set; } = [];
     
-    public Movie(
-        int id,
-        int code,
-        string title, 
-        string episode, 
-        string openingCrawl, 
-        string director, 
-        string producer, 
-        string releaseDate,
-        int characterCode,
-        int planetCode,
-        int vehicleCode,
-        int starshipCode,
-        IList<People> characters, 
-        IList<Planet> planets, 
-        IList<Vehicle> vehicles, 
-        IList<Starship> starships) : this()
+    public Movie(int id, string title, short episode, string openingCrawl, string director, string producer, string releaseDate) : this()
     {
         Id = id;
-        Code = code;
         Title = title;
         Episode = episode;
         OpeningCrawl = openingCrawl;
         Director = director;
         Producer = producer;
         ReleaseDate = releaseDate;
-        CharacterCode = characterCode;
-        PlanetCode = planetCode;
-        VehicleCode = vehicleCode;
-        StarshipCode = starshipCode;
-        Characters = characters;
-        Planets = planets;
-        Vehicles = vehicles;
-        Starships = starships;
     }
     
     public static MovieResponse ToResponse(Movie? movie) => FromModelToResponse(movie);
@@ -91,11 +61,9 @@ public sealed class Movie()
     private static IList<MoviePeopleResponse> ToMoviePeopleResponse(Movie movie)
     {
         return movie.Characters
-            .GroupBy(m => m.Code)
-            .Select(character => character.First())
             .Select(character => new MoviePeopleResponse
             {
-                Code = character.Code,
+                Id = character.Id,
                 Name = character.Name
             }).ToList();
     }
@@ -103,11 +71,9 @@ public sealed class Movie()
     private static IList<MoviePlanetResponse> ToMoviePlanetResponse(Movie movie)
     {
         return movie.Planets
-            .GroupBy(m => m.Code)
-            .Select(planet => planet.First())
             .Select(planet => new MoviePlanetResponse
             {
-                Code = planet.Code,
+                Id = planet.Id,
                 Name = planet.Name
             }).ToList();
     }
@@ -115,11 +81,9 @@ public sealed class Movie()
     private static IList<MovieVehicleResponse> ToMovieVehicleResponse(Movie movie)
     {
         return movie.Vehicles
-            .GroupBy(m => m.Code)
-            .Select(vehicle => vehicle.First())
             .Select(vehicle => new MovieVehicleResponse
             {
-                Code = vehicle.Code,
+                Id = vehicle.Id,
                 Name = vehicle.Name
             }).ToList();
     }
@@ -127,11 +91,9 @@ public sealed class Movie()
     private static IList<MovieStarshipResponse> ToMovieStarshipResponse(Movie movie)
     {
         return movie.Starships
-            .GroupBy(m => m.Code)
-            .Select(starship => starship.First())
             .Select(starship => new MovieStarshipResponse
             {
-                Code = starship.Code,
+                Id = starship.Id,
                 Name = starship.Name
             }).ToList();
     }

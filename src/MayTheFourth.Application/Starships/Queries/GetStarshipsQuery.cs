@@ -1,3 +1,3 @@
 ﻿namespace MayTheFourth.Application.Starships.Queries;
 
-public record GetStarshipsQuery() : IRequest<IList<Starship>>;
+public record GetStarshipsQuery(int? Skip, int? Take) : IRequest<IList<Starship>>;

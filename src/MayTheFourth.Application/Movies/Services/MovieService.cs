@@ -6,6 +6,15 @@ namespace MayTheFourth.Application.Movies.Services;
 
 public sealed class MovieService(ISender mediator) : IMovieService
 {
+    public async Task<Result<IList<MovieResponse>>> GetAllAsync(int? skip, int? take, CancellationToken cancellationToken = default)
+    {
+        var movies = await mediator.Send(new GetAllQuery(skip ?? 0, take ?? 10), cancellationToken);
+        if (movies is null)
+            return Result<IList<MovieResponse>>.Failure(Error.NotFound);
+        
+        return Result<IList<MovieResponse>>.Ok(Movie.ToResponse(movies));
+    }
+    
     public async Task<Result<IList<MovieResponse>>> SearchByTitleAsync(string title, CancellationToken cancellationToken = default)
     {
         var movies = await mediator.Send(new SearchByTitleQuery(title), cancellationToken);
@@ -36,15 +45,6 @@ public sealed class MovieService(ISender mediator) : IMovieService
     public async Task<Result<IList<MovieResponse>>> SearchByReleaseDateAsync(string releaseDate, CancellationToken cancellationToken = default)
     {
         var movies = await mediator.Send(new SearchByReleaseDateQuery(releaseDate), cancellationToken);
-        if (movies is null)
-            return Result<IList<MovieResponse>>.Failure(Error.NotFound);
-        
-        return Result<IList<MovieResponse>>.Ok(Movie.ToResponse(movies));
-    }
-
-    public async Task<Result<IList<MovieResponse>>> GetAllAsync(CancellationToken cancellationToken = default)
-    {
-        var movies = await mediator.Send(new GetAllQuery(), cancellationToken);
         if (movies is null)
             return Result<IList<MovieResponse>>.Failure(Error.NotFound);
         

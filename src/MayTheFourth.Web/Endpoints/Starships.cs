@@ -6,7 +6,7 @@ public static class Starships
 {
     public static void StarshipEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/v1/starships", async (IStarshipServices services) => await services.GetStarshipsAsync())
+        app.MapGet("/api/v1/starships", async (IStarshipServices services, int? skip, int? take) => await services.GetStarshipsAsync(skip, take))
             .WithName("GetStarships")
             .WithTags("Starships")
             .WithSummary("Returns all starships from Star Wars universe.")

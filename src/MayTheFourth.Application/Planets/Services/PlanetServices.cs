@@ -6,9 +6,9 @@ namespace MayTheFourth.Application.Planets.Services;
 
 public class PlanetServices(ISender mediator) : IPlanetServices
 {
-    public async Task<Result<IList<PlanetResponse>>> GetPlanetsAsync(CancellationToken cancellationToken = default)
+    public async Task<Result<IList<PlanetResponse>>> GetPlanetsAsync(int? skip, int? take, CancellationToken cancellationToken = default)
     {
-        var response = await mediator.Send(new GetPlanetsQuery(), cancellationToken);
+        var response = await mediator.Send(new GetPlanetsQuery(skip ?? 0, take ?? 10), cancellationToken);
         if (response is null) return Result<IList<PlanetResponse>>.Failure(Error.NotFound);
         return Result<IList<PlanetResponse>>.Ok(Planet.ToResponse(response));
     }

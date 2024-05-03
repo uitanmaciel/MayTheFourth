@@ -6,24 +6,21 @@ namespace MayTheFourth.Application.Planets;
 
 public sealed class Planet()
 {
-    public int Id { get; set; }
-    public int Code { get; set; }
-    public string Name { get; set; } = null!;
-    public string RotationPeriod { get; set; } = null!;
-    public string OrbitalPeriod { get; set; } = null!;
-    public string Diameter { get; set; } = null!;
-    public string Climate { get; set; } = null!;
-    public string Gravity { get; set; } = null!;
-    public string Terrain { get; set; } = null!;
-    public string SurfaceWater { get; set; } = null!;
-    public string Population { get; set; } = null!;
-    public int CharacterCode { get; set; }
-    public int MovieCode { get; set; }
-    public IList<People> Peoples { get; set; } = [];
-    public IList<Movie> Movies { get; set; } = [];
+    public int Id { get; private set; }
+    public string Name { get; private set; } = null!;
+    public string RotationPeriod { get; private set; } = null!;
+    public string OrbitalPeriod { get; private set; } = null!;
+    public string Diameter { get; private set; } = null!;
+    public string Climate { get; private set; } = null!;
+    public string Gravity { get; private set; } = null!;
+    public string Terrain { get; private set; } = null!;
+    public string SurfaceWater { get; private set; } = null!;
+    public string Population { get; private set; } = null!;
+    public IList<People> Peoples { get; private set; } = [];
+    public IList<Movie> Movies { get; private set; } = [];
     
-    public Planet(
-        int code, 
+    public Planet( 
+        int id, 
         string name, 
         string rotationPeriod, 
         string orbitalPeriod, 
@@ -32,13 +29,9 @@ public sealed class Planet()
         string gravity, 
         string terrain, 
         string surfaceWater, 
-        string population,
-        int characterCode,
-        int movieCode,
-        IList<People> peoples,
-        IList<Movie> movies) : this()
+        string population) : this()
     {
-        Code = code;
+        Id = id;
         Name = name;
         RotationPeriod = rotationPeriod;
         OrbitalPeriod = orbitalPeriod;
@@ -48,10 +41,6 @@ public sealed class Planet()
         Terrain = terrain;
         SurfaceWater = surfaceWater;
         Population = population;
-        CharacterCode = characterCode;
-        MovieCode = movieCode;
-        Peoples = peoples;
-        Movies = movies;
     }
     
     public static PlanetResponse ToResponse(Planet? planet) => FromModelToResponse(planet);
@@ -87,11 +76,9 @@ public sealed class Planet()
         if (planet is null) return new List<PlanetPeopleResponse>();
 
         return planet.Peoples
-            .GroupBy(p => p.Code)
-            .Select(people => people.First())
             .Select(people => new PlanetPeopleResponse
             {
-                Id = people.Code,
+                Id = people.Id,
                 Name = people.Name
             }).ToList();
     }
@@ -101,11 +88,9 @@ public sealed class Planet()
         if (planet is null) return new List<PlanetMovieResponse>();
 
         return planet.Movies
-            .GroupBy(p => p.Code)
-            .Select(movive => movive.First())
             .Select(movie => new PlanetMovieResponse
             {
-                Id = movie.Code,
+                Id = movie.Id,
                 Title = movie.Title
             }).ToList();
     }

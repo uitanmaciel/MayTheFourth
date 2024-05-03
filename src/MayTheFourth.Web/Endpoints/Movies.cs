@@ -6,7 +6,7 @@ public static class Movies
 {
     public static void MoviesEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/v1/movies", async (IMovieService service) => await service.GetAllAsync())
+        app.MapGet("/api/v1/movies", async (IMovieService service, int? skip, int? take) => await service.GetAllAsync(skip, take))
             .WithName("GetAllMovies")
             .WithTags("Movies")
             .WithSummary("Returns all movies from Star Wars universe.")

@@ -7,16 +7,16 @@ public static class Characters
 {
     public static void PeopleEndpoints(this WebApplication app)
     {
-        app.MapGet("/api/v1/peoples", async (IPeopleServices services) => await services.GetPeoplesAsync())
+        app.MapGet("/api/v1/peoples", async (IPeopleServices services, int? skip, int? take) => await services.GetPeoplesAsync(skip, take))
             .WithName("GetAllPeoples")
             .WithTags("Characters")
             .WithSummary("Returns all characters from Star Wars universe.")
             .WithOpenApi();
         
-        app.MapGet("/api/v1/peoples/get-by-code/{code}", async (IPeopleServices services, int code) => await services.GetPeopleByCodeAsync(code))
+        app.MapGet("/api/v1/peoples/get-by-id/{id}", async (IPeopleServices services, int id) => await services.GetPeopleByIdAsync(id))
             .WithName("GetPeopleByCode")
             .WithTags("Characters")
-            .WithSummary("Returns a character by code.")
+            .WithSummary("Returns a character by Id.")
             .WithOpenApi();
         
         app.MapGet("/api/v1/peoples/get-by-name/{name}", async (IPeopleServices services, string name) => await services.GetPeopleByNameAsync(name))

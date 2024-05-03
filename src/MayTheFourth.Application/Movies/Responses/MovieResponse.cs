@@ -5,7 +5,7 @@ namespace MayTheFourth.Application.Movies.Responses;
 public record MovieResponse
 {
     [JsonPropertyName("title")] public string Title { get; set; } = null!;
-    [JsonPropertyName("episode")] public string Episode { get; set; } = null!;
+    [JsonPropertyName("episode")] public short Episode { get; set; }
     [JsonPropertyName("openingCrawl")] public string OpeningCrawl { get; set; } = null!;
     [JsonPropertyName("director")] public string Director { get; set; } = null!;
     [JsonPropertyName("producer")] public string Producer { get; set; } = null!;

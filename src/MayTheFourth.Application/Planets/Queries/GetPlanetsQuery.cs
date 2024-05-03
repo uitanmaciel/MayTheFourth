@@ -1,3 +1,3 @@
 ﻿namespace MayTheFourth.Application.Planets.Queries;
 
-public record GetPlanetsQuery() : IRequest<IList<Planet>>;
+public record GetPlanetsQuery(int? Skip, int? Take) : IRequest<IList<Planet>>;

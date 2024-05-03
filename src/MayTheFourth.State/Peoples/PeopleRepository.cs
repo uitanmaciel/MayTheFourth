@@ -7,115 +7,41 @@ namespace MayTheFourth.State.Peoples;
 
 public class PeopleRepository(MayTheFourthDbContext context) : IPeopleRepository, IAsyncDisposable
 {
-    public async Task<IList<People>> GetPeoplesAsync(CancellationToken cancellationToken = default)
+    public async Task<IList<People>> GetPeoplesAsync(int? skip, int? take, CancellationToken cancellationToken = default)
     {
-        var peoples = await context.Peoples
+        return await context.Peoples
             .AsNoTracking()
-            .GroupBy(p => p.Code)
-            .Select(c => c.First())
+            .Include(p => p.Movies)
+            .Skip(skip ?? 0)
+            .Take(take ?? 10)
             .ToListAsync(cancellationToken);
-        
-        var planets = await context.Planets
-            .AsNoTracking()
-            .Where(p => peoples.Select(x => x.Code).Contains(p.CharacterCode))
-            .ToListAsync(cancellationToken);
-        
-        var movies = await context.Movies
-            .AsNoTracking()
-            .Where(m => peoples.Select(x => x.Code).Contains(m.CharacterCode))
-            .ToListAsync(cancellationToken);
-
-        foreach (var people in peoples)
-            people.Planets = planets.Where(p => p.CharacterCode == people.Code).ToList();
-        
-        foreach (var people in peoples)
-            people.Movies = movies.Where(m => m.CharacterCode == people.Code).ToList();
-        
-        return peoples;
     }
 
-    public async Task<People> GetPeopleByCodeAsync(int code, CancellationToken cancellationToken = default)
+    public async Task<People> GetPeopleByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        var peoples = await context.Peoples
+        return (await context.Peoples
             .AsNoTracking()
-            .Where(p => p.Code == code)
-            .GroupBy(p => p.Code)
-            .Select(c => c.First())
-            .ToListAsync(cancellationToken);
-        
-        var planets = await context.Planets
-            .AsNoTracking()
-            .Where(p => peoples.Select(x => x.Code).Contains(p.CharacterCode))
-            .ToListAsync(cancellationToken);
-        
-        var movies = await context.Movies
-            .AsNoTracking()
-            .Where(m => peoples.Select(x => x.Code).Contains(m.CharacterCode))
-            .ToListAsync(cancellationToken);
-
-        foreach (var people in peoples)
-            people.Planets = planets.Where(p => p.CharacterCode == people.Code).ToList();
-        
-        foreach (var people in peoples)
-            people.Movies = movies.Where(m => m.CharacterCode == people.Code).ToList();
-        
-        return peoples[0];
+            .Include(p => p.Movies)
+            .Where(p => p.Id == id)
+            .FirstOrDefaultAsync(cancellationToken))!;
     }
 
     public async Task<IList<People>> GetPeopleByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        var peoples = await context.Peoples
+        return (await context.Peoples
             .AsNoTracking()
+            .Include(p => p.Movies)
             .Where(p => p.Name.Contains(name))
-            .GroupBy(p => p.Code)
-            .Select(c => c.First())
-            .ToListAsync(cancellationToken);
-        
-        var planets = await context.Planets
-            .AsNoTracking()
-            .Where(p => peoples.Select(x => x.Code).Contains(p.CharacterCode))
-            .ToListAsync(cancellationToken);
-        
-        var movies = await context.Movies
-            .AsNoTracking()
-            .Where(m => peoples.Select(x => x.Code).Contains(m.CharacterCode))
-            .ToListAsync(cancellationToken);
-
-        foreach (var people in peoples)
-            people.Planets = planets.Where(p => p.CharacterCode == people.Code).ToList();
-        
-        foreach (var people in peoples)
-            people.Movies = movies.Where(m => m.CharacterCode == people.Code).ToList();
-        
-        return peoples;
+            .ToListAsync(cancellationToken))!;
     }
 
     public async Task<IList<People>> GetPeopleByGenderAsync(string gender, CancellationToken cancellationToken = default)
     {
-        var peoples = await context.Peoples
+        return (await context.Peoples
             .AsNoTracking()
+            .Include(p => p.Movies)
             .Where(p => p.Gender.Contains(gender))
-            .GroupBy(p => p.Code)
-            .Select(c => c.First())
-            .ToListAsync(cancellationToken);
-        
-        var planets = await context.Planets
-            .AsNoTracking()
-            .Where(p => peoples.Select(x => x.Code).Contains(p.CharacterCode))
-            .ToListAsync(cancellationToken);
-        
-        var movies = await context.Movies
-            .AsNoTracking()
-            .Where(m => peoples.Select(x => x.Code).Contains(m.CharacterCode))
-            .ToListAsync(cancellationToken);
-
-        foreach (var people in peoples)
-            people.Planets = planets.Where(p => p.CharacterCode == people.Code).ToList();
-        
-        foreach (var people in peoples)
-            people.Movies = movies.Where(m => m.CharacterCode == people.Code).ToList();
-        
-        return peoples;
+            .ToListAsync(cancellationToken))!;
     }
 
     public async ValueTask DisposeAsync() => await context.DisposeAsync();

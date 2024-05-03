@@ -6,16 +6,16 @@ namespace MayTheFourth.Application.Peoples.Services;
 
 public class PeopleServices(ISender mediator) : IPeopleServices
 {
-    public async Task<Result<IList<PeopleResponse>>> GetPeoplesAsync(CancellationToken cancellationToken = default)
+    public async Task<Result<IList<PeopleResponse>>> GetPeoplesAsync(int? skip, int? take, CancellationToken cancellationToken = default)
     {
-        var response = await mediator.Send(new GetPeopleQuery(), cancellationToken);
+        var response = await mediator.Send(new GetPeopleQuery(skip ?? 0, take ?? 10), cancellationToken);
         if(response is null) return Result<IList<PeopleResponse>>.Failure(Error.NotFound);
         return Result<IList<PeopleResponse>>.Ok(People.ToResponse(response));
     }
 
-    public async Task<Result<PeopleResponse>> GetPeopleByCodeAsync(int code, CancellationToken cancellationToken = default)
+    public async Task<Result<PeopleResponse>> GetPeopleByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        var response = await mediator.Send(new GetPeopleByCodeQuery(code), cancellationToken);
+        var response = await mediator.Send(new GetPeopleByIdQuery(id), cancellationToken);
         if(response is null) return Result<PeopleResponse>.Failure(Error.NotFound);
         return Result<PeopleResponse>.Ok(People.ToResponse(response));
     }
