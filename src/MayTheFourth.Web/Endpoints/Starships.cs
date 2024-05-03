@@ -8,18 +8,26 @@ public static class Starships
     {
         app.MapGet("/api/v1/starships", async (IStarshipServices services) => await services.GetStarshipsAsync())
             .WithName("GetStarships")
-            .WithTags("Starships");
+            .WithTags("Starships")
+            .WithSummary("Returns all starships from Star Wars universe.")
+            .WithOpenApi();
         
         app.MapGet("/api/v1/starships/get-by-name/{name}", async (IStarshipServices services, string name) => await services.GetStarshipByNameAsync(name))
             .WithName("GetStarshipByName")
-            .WithTags("Starships");
+            .WithTags("Starships")
+            .WithSummary("Returns a starship list by name.")
+            .WithOpenApi();
         
         app.MapGet("/api/v1/starships/get-by-model/{model}", async (IStarshipServices services, string model) => await services.GetStarshipByModelAsync(model))
             .WithName("GetStarshipByModel")
-            .WithTags("Starships");
+            .WithTags("Starships")
+            .WithSummary("Returns a starship list by model.")
+            .WithOpenApi();
         
         app.MapGet("/api/v1/starships/get-by-class/{class}", async (IStarshipServices services, string @class) => await services.GetStarshipByClassAsync(@class))
             .WithName("GetStarshipByClass")
-            .WithTags("Starships");
+            .WithTags("Starships")
+            .WithSummary("Returns a starship list by class.")
+            .WithOpenApi();
     }
 }

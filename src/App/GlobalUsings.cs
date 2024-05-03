@@ -21,3 +21,4 @@ global using MayTheFourth.Application.Starships.Interfaces.Services;
 global using MayTheFourth.Application.Starships.Interfaces.State;
 global using MayTheFourth.Application.Starships.Services;
 global using MayTheFourth.State.Starships;
+global using Microsoft.OpenApi.Models;
